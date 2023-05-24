@@ -76,7 +76,11 @@ public class MemberControllerTests {
 
     @Test
     public void testPageList() {
-        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(5).perPage(10).build();
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(16)
+                .perPage(5)
+                .perPagination(5)
+                .build();
         PageResultDTO<Member, MemberEntity> resultDTO = memberService.getList(pageRequestDTO);
         // print records in page
         for(Member member : resultDTO.getDtoList())
@@ -90,6 +94,7 @@ public class MemberControllerTests {
         System.out.println("Prev : " + resultDTO.isPrev()); //  PerPagination = 4인경, 1 - 4, 5 - 8, 9 - 12
         System.out.println("Next : " + resultDTO.isNext());
         System.out.println("Total Page : " + resultDTO.getTotalPage());
-        resultDTO.getPageList().forEach(i -> System.out.println(i));
+//        resultDTO.getPageList().forEach(i -> System.out.println(i));
+        for(Integer i : resultDTO.getPageList()) System.out.format("%3d",i);
     }
 }
